@@ -1,7 +1,7 @@
 {
   "name": "passman",
-  "version": "1.0.0",
-  "description": "password generator use master password",
+  "version": "1.0.1",
+  "description": "A simple password manager and generator",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "bin": {
@@ -29,6 +29,7 @@
   "keywords": [
     "password",
     "generator",
+    "manager",
     "master",
     "AES",
     "SHA256",
