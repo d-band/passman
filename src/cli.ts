@@ -49,12 +49,16 @@ function saveConfig(config: PassmanConfig): void {
   fs.writeFileSync(CONF_PATH, data, 'utf-8');
 }
 
-async function getPass(config: PassmanConfig, item: Account): Promise<string> {
-  if (item.username) {
-    console.log(`Your username is: ${green(item.username)}`);
+function showPass(password: string, username?: string) {
+  if (username) {
+    console.log(`Your username is: ${green(username)}`);
   }
+  console.log(`Your password is: ${green(password)}`);
+}
+
+async function getPass(config: PassmanConfig, item: Account): Promise<string> {
   if (item.password) {
-    console.log(`Your password is: ${green(item.password)}`);
+    showPass(item.password, item.username);
     return item.password;
   }
   let master = config.password;
@@ -62,7 +66,7 @@ async function getPass(config: PassmanConfig, item: Account): Promise<string> {
     master = await inputPassword(false);
   }
   const pass = await genPass(master, realm(item), config.seed, item.options);
-  console.log(`Your password is: ${green(pass)}`);
+  showPass(pass, item.username);
   return pass;
 }
 
