@@ -36,7 +36,7 @@ Commands:
 
 ## Documents
 
-[Read full documents](d-band.github.io/passman/)
+[Read full documents](https://d-band.github.io/passman/)
 
 ## Report a issue
 
