@@ -77,7 +77,14 @@ export class CharList {
     return this.data.join('');
   }
 }
-
+/**
+ * Generate password with master password, realm and seed
+ * @param password master password
+ * @param realm identify string (like URL)
+ * @param seed seed data (optional)
+ * @param options options for generate
+ * @returns new password
+ */
 export async function genPass(
   password: crypto.BinaryLike,
   realm: crypto.BinaryLike,

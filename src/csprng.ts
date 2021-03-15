@@ -12,7 +12,12 @@ function passKey(
     });
   });
 }
-
+/**
+ * Encrypt data with AES-256-GCM
+ * @param password password for encrypt
+ * @param data plaintext data
+ * @returns salt + ciphertext + tag
+ */
 export async function gcmEncrypt(
   password: crypto.BinaryLike,
   data: crypto.BinaryLike
@@ -28,7 +33,12 @@ export async function gcmEncrypt(
     cipher.getAuthTag()
   ]);
 }
-
+/**
+ * Decrypt data with AES-256-GCM
+ * @param password password for decrypt
+ * @param data encrypted data (salt + ciphertext + tag)
+ * @returns salt + plaintext + tag
+ */
 export async function gcmDecrypt(
   password: crypto.BinaryLike,
   data: string | Buffer
@@ -48,7 +58,11 @@ export async function gcmDecrypt(
     tag
   ]);
 }
-
+/**
+ * Generate seed with master password
+ * @param password master password for generate seed
+ * @returns seed data
+ */
 export function genSeed(password: crypto.BinaryLike): Promise<Buffer> {
   const seed = crypto.randomBytes(256 - 12 - 16);
   return gcmEncrypt(password, seed);
@@ -60,7 +74,13 @@ class ZeroStream extends Readable {
     this.push(Buffer.alloc(1));
   }
 }
-
+/**
+ * Cryptographically Secure Pseudo-Random Number Generator (CSPRNG)
+ * @param password master password
+ * @param realm identify string (like URL)
+ * @param seed generated seed data previously
+ * @returns CSPRNG stream
+ */
 export async function createRNG(
   password: crypto.BinaryLike,
   realm: crypto.BinaryLike,
